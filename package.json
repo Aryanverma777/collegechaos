@@ -24,6 +24,7 @@
     "posthog-js": "^1.270.1",
     "react": "^19",
     "react-dom": "^19",
+    "react-firebase-hooks": "^5.1.1",
     "tailwind-merge": "^3.5.0"
   },
   "devDependencies": {

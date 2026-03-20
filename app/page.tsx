@@ -2,6 +2,10 @@
 
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from '../app/firebase/config';
+import { useRouter } from "next/dist/client/components/navigation";
+import { signOut } from "firebase/auth";
 
 // ── Types ──────────────────────────────────────────────────────────────────
 type Category = "Rant" | "Meme" | "Gossip" | "Question" | "Confession" | "Random";
@@ -511,6 +515,15 @@ function CreatePostModal({ onClose, onCreate }: {
 
 // ── Main Page ──────────────────────────────────────────────────────────────
 export default function HomePage() {
+  const [user] = useAuthState(auth);
+  const router = useRouter();
+  
+  console.log("Current user:", user);
+
+  if(!user){
+    router.push("/login");
+  }
+
   const [posts, setPosts] = useState<Post[]>(SEED_POSTS);
   const [stories, setStories] = useState<Story[]>(SEED_STORIES);
   const [filter, setFilter] = useState<Category | "All">("All");
@@ -655,6 +668,8 @@ export default function HomePage() {
       `}</style>
 
       <div className="font-tech min-h-screen bg-[#010108] grid-bg">
+
+        <button onClick={() => signOut(auth)} className="bottom-nav-btn fixed bottom-4 right-4 z-50 bg-[#ff2d78] text-white px-5 py-3 rounded-full shadow-lg hover:bg-[#ff2d7811] transition-all">logout</button>
 
         {/* ══ TICKER ══ */}
         <div className="overflow-hidden bg-[#ff2d78] relative" style={{ height: 28 }}>
