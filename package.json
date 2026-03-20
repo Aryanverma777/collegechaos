@@ -1,0 +1,57 @@
+{
+  "name": "nextjs-base-starter",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "cross-env NEXT_DISABLE_ESLINT=1 NEXT_DISABLE_TYPECHECK=1 next dev --turbopack",
+    "build": "next build",
+    "start": "next start",
+    "lint": "oxlint",
+    "type-check": "tsc --noEmit",
+    "check-all": "npm run lint & npm run type-check & wait"
+  },
+  "dependencies": {
+    "@fontsource/dm-sans": "^5.2.8",
+    "@fontsource/jetbrains-mono": "^5.2.8",
+    "@fontsource/syne": "^5.2.7",
+    "clsx": "^2.1.1",
+    "firebase": "^12.11.0",
+    "firebase-admin": "^13.7.0",
+    "framer-motion": "^12.38.0",
+    "lucide-react": "^0.577.0",
+    "next": "16.1.0-canary.19",
+    "next-themes": "^0.4.6",
+    "posthog-js": "^1.270.1",
+    "react": "^19",
+    "react-dom": "^19",
+    "tailwind-merge": "^3.5.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "cross-env": "^10.1.0",
+    "oxlint": "^1.12.0",
+    "postcss": "^8",
+    "supabase": "2.34.3",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "unrs-resolver"
+    ],
+    "peerDependencyRules": {
+      "allowAny": [
+        "supabase"
+      ]
+    },
+    "ignoredBuiltDependencies": [
+      "@firebase/util",
+      "core-js",
+      "protobufjs",
+      "sharp",
+      "supabase"
+    ]
+  }
+}

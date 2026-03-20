@@ -1,0 +1,188 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --font-syne: 'Syne', sans-serif;
+    --font-dm-sans: 'DM Sans', sans-serif;
+    --font-jetbrains-mono: 'JetBrains Mono', monospace;
+
+    /* Dark Theme (Default) */
+    --bg-base: #0f0f0f;
+    --bg-surface: #212121;
+    --bg-elevated: #272727;
+    --bg-input: #121212;
+    --bg-post: #000000;
+
+    --text-primary: #f1f1f1;
+    --text-secondary: #aaaaaa;
+    --text-tertiary: #717171;
+    --text-link: #3ea6ff;
+
+    --border-default: #3f3f3f;
+    --border-hover: rgba(255, 255, 255, 0.18);
+    --border-post: #262626;
+
+    --icon-default: #aaaaaa;
+    --icon-active: #f1f1f1;
+
+    --btn-primary-bg: #0095f6;
+    --btn-primary-txt: #ffffff;
+    --btn-secondary-bg: transparent;
+    --btn-secondary-border: #363636;
+    --btn-secondary-txt: #f1f1f1;
+
+    --story-viewed: #3f3f3f;
+    --like-active: #ff3040;
+    --upvote-active: #7c6aff;
+
+    --navbar-bg: #0f0f0f;
+    --navbar-border: #3f3f3f;
+    --bottomnav-bg: #000000;
+    --bottomnav-border: #262626;
+
+    --scrollbar-thumb: #3f3f3f;
+    --scrollbar-hover: #606060;
+
+    --divider: #3f3f3f;
+    --placeholder: #737373;
+  }
+
+  .light {
+    --bg-base: #ffffff;
+    --bg-surface: #ffffff;
+    --bg-elevated: #f2f2f2;
+    --bg-input: #fafafa;
+    --bg-post: #ffffff;
+
+    --text-primary: #0a0a0a;
+    --text-secondary: #737373;
+    --text-tertiary: #a8a8a8;
+    --text-link: #0095f6;
+
+    --border-default: #dbdbdb;
+    --border-hover: #a8a8a8;
+    --border-post: #dbdbdb;
+
+    --icon-default: #262626;
+    --icon-active: #000000;
+
+    --btn-primary-bg: #0095f6;
+    --btn-primary-txt: #ffffff;
+    --btn-secondary-bg: transparent;
+    --btn-secondary-border: #dbdbdb;
+    --btn-secondary-txt: #262626;
+
+    --story-viewed: #c7c7c7;
+    --like-active: #ff3040;
+    --upvote-active: #7c6aff;
+
+    --navbar-bg: #ffffff;
+    --navbar-border: #dbdbdb;
+    --bottomnav-bg: #ffffff;
+    --bottomnav-border: #dbdbdb;
+
+    --scrollbar-thumb: #c2c2c2;
+    --scrollbar-hover: #a0a0a0;
+
+    --divider: #dbdbdb;
+    --placeholder: #a8a8a8;
+  }
+
+  body {
+    font-family: var(--font-dm-sans);
+    background-color: var(--bg-base);
+    color: var(--text-primary);
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    @apply antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6, .font-syne {
+    font-family: var(--font-syne);
+  }
+
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--scrollbar-thumb);
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--scrollbar-hover);
+  }
+}
+
+@layer components {
+  .glass-card {
+    background-color: var(--bg-post);
+    border: 1px solid var(--border-post);
+    @apply rounded-[8px] transition-all duration-300;
+  }
+
+  .input-field {
+    background-color: var(--bg-input);
+    border: 1px solid var(--border-default);
+    color: var(--text-primary);
+    @apply rounded-[8px] px-[14px] py-[10px] outline-none transition-all duration-200;
+  }
+
+  .input-field:focus {
+    border-color: #a8a8a8;
+  }
+
+  .btn-primary {
+    background-color: var(--btn-primary-bg);
+    color: var(--btn-primary-txt);
+    @apply rounded-[8px] font-bold transition-all duration-200 hover:opacity-85 active:scale-[0.97];
+  }
+
+  .btn-secondary {
+    background-color: var(--btn-secondary-bg);
+    border: 1px solid var(--btn-secondary-border);
+    color: var(--btn-secondary-txt);
+    @apply rounded-[8px] font-bold transition-all duration-200 active:scale-[0.97];
+  }
+
+  .light .btn-secondary:hover {
+    background-color: #efefef;
+  }
+
+  .dark .btn-secondary:hover {
+    background-color: #363636;
+  }
+
+  .marquee {
+    display: flex;
+    overflow: hidden;
+    user-select: none;
+    gap: 2rem;
+  }
+
+  .marquee-content {
+    flex-shrink: 0;
+    display: flex;
+    justify-content: space-around;
+    min-width: 100%;
+    gap: 2rem;
+    animation: scroll 30s linear infinite;
+  }
+
+  @keyframes scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-100%); }
+  }
+
+  .story-ring-unviewed {
+    background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+  }
+
+  .story-ring-viewed {
+    background: var(--story-viewed);
+  }
+}
