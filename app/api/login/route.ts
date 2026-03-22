@@ -59,6 +59,15 @@ export async function POST(req: NextRequest) {
 
   } catch (error: any) {
     console.error("❌ Login error details:", error);
-    return NextResponse.json({ error: "Authentication failed", details: error.message }, { status: 401 });
+    
+    // Check if it's a mongo connection error
+    if (error.name === 'MongoServerSelectionError' || error.name === 'MongoNetworkError') {
+      console.error("💡 TIP: Check your MongoDB Atlas Network Access (IP Whitelist). Ensure 0.0.0.0/0 is added for Vercel.");
+    }
+
+    return NextResponse.json(
+      { error: "Authentication failed", details: error.message }, 
+      { status: 401 }
+    );
   }
 }
