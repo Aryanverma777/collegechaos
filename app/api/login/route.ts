@@ -57,8 +57,8 @@ export async function POST(req: NextRequest) {
     
     return NextResponse.json({ success: true });
 
-  } catch (error) {
+  } catch (error: any) {
     console.error("❌ Login error details:", error);
-    return NextResponse.json({ error: "Authentication failed" }, { status: 401 });
+    return NextResponse.json({ error: "Authentication failed", details: error.message }, { status: 401 });
   }
 }

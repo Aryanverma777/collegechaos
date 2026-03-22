@@ -48,7 +48,8 @@ export default function SignupPage() {
       });
 
       if (!response.ok) {
-        throw new Error("Session creation failed");
+        const errData = await response.json().catch(() => ({}));
+        throw new Error(`Session creation failed: ${errData.error || errData.details || response.statusText}`);
       }
 
       // Step 4 — only redirect after cookie is set
