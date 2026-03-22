@@ -1,0 +1,8 @@
+{
+  "node_modules\\.pnpm\\next@16.1.0-canary.19_@open_5a9a74e53b1dfaab6254c8314ff591bf\\node_modules\\next\\dist\\client\\dev\\hot-reloader\\app\\web-socket.js -> @vercel/turbopack-ecmascript-runtime/browser/dev/hmr-client/hmr-client.ts": {
+    "id": "node_modules\\.pnpm\\next@16.1.0-canary.19_@open_5a9a74e53b1dfaab6254c8314ff591bf\\node_modules\\next\\dist\\client\\dev\\hot-reloader\\app\\web-socket.js -> @vercel/turbopack-ecmascript-runtime/browser/dev/hmr-client/hmr-client.ts",
+    "files": [
+      "static/chunks/_app-pages-browser_node_modules_pnpm_next_16_1_0-canary_19__open_5a9a74e53b1dfaab6254c8314ff5-4ae0ae.js"
+    ]
+  }
+}

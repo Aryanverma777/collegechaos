@@ -1,7 +1,6 @@
 /** @type {import('next').NextConfig} */
 
 const nextConfig = {
-	turbopack: {},
 	images: {
 		remotePatterns: [
 			{
@@ -15,6 +14,9 @@ const nextConfig = {
 	},
 	eslint: {
 		ignoreDuringBuilds: true,
+	},
+	env: {
+		SESSION_SECRET: process.env.SESSION_SECRET,
 	},
 	allowedDevOrigins: ["*.theopenbuilder.com"],
 };

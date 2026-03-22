@@ -1,6 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 4, "column": 0}, "map": {"version":3,"sources":["file:///C:/Users/ACER/Desktop/Projects%20Pred/collegechaos/instrumentation-client.ts"],"sourcesContent":["import posthog from 'posthog-js'\r\n\r\nposthog.init(\"phc_v1zGl740rSRNUNCouxKTzOdK31AIcRRWXNf4VMpfa4y\", {\r\n    api_host: \"https://us.i.posthog.com\",\r\n    defaults: '2025-05-24'\r\n});\r\n"],"names":[],"mappings":";AAAA;;AAEA,yNAAO,CAAC,IAAI,CAAC,mDAAmD;IAC5D,UAAU;IACV,UAAU;AACd"}}]
-}

@@ -22,7 +22,7 @@ export default function SignupPage() {
   const passwordMatch = form.confirm !== "" && form.password === form.confirm;
   const passwordMismatch = form.confirm !== "" && form.password !== form.confirm;
 
-  const handleSubmit = async () => {                   // ✅ async so we can await Firebase
+  const handleSubmit = async () => {
     if (!form.name || !form.email || !form.password || !form.confirm || !agree) return;
     if (passwordMismatch) return;
 
@@ -30,22 +30,39 @@ export default function SignupPage() {
     setError("");
 
     try {
+      // Step 1 — create the user in Firebase (same as before)
       const userCredential = await createUserWithEmailAndPassword(
         auth,
         form.email,
-        form.password                                  // ✅ was "passwordMatch" (a boolean!)
+        form.password
       );
-      console.log(userCredential.user);
+
+      // Step 2 — NEW: get the ID token from the newly created user
+      const idToken = await userCredential.user.getIdToken();
+
+      // Step 3 — NEW: send token to our server to create session + save to MongoDB
+      const response = await fetch("/api/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ idToken }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Session creation failed");
+      }
+
+      // Step 4 — only redirect after cookie is set
       setForm({ name: "", email: "", password: "", confirm: "" });
-      router.push("/");                                // ✅ use router from useRouter hook
-    } catch (err: unknown) {                           // ✅ proper catch block was missing
+      router.push("/");
+
+    } catch (err: unknown) {
       if (err instanceof Error) {
         setError(err.message);
       } else {
         setError("Registration failed. Please try again.");
       }
     } finally {
-      setIsLoading(false);                             // ✅ always stop loading
+      setIsLoading(false);
     }
   };
 

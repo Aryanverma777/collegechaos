@@ -22,11 +22,31 @@ export default function LoginPage() {
   const handleSubmit = async () => {
     setIsLoading(true);
     try {
+      // Step 1 — same as before, Firebase checks email + password
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
-      console.log("User signed in:", userCredential.user);
+      
+      // Step 2 — NEW: grab the ID token from the logged in user
+      // This is a signed proof from Firebase that says "yes this user is real"
+      const idToken = await userCredential.user.getIdToken();
+
+      // Step 3 — NEW: send that token to OUR server
+      // Our server will verify it, save user to MongoDB, create cookie
+      const response = await fetch("/api/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ idToken }),
+      });
+
+      // Step 4 — check if our server accepted it
+      if (!response.ok) {
+        throw new Error("Session creation failed");
+      }
+
+      // Step 5 — now ACTUALLY redirect, cookie is set
       setEmail("");
       setPassword("");
       router.push("/");
+
     } catch (error) {
       console.error("Error signing in:", error);
     } finally {

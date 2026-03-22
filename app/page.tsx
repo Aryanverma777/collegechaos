@@ -520,9 +520,11 @@ export default function HomePage() {
   
   console.log("Current user:", user);
 
-  if(!user){
-    router.push("/login");
-  }
+  useEffect(() => {
+    if (!user) {
+      router.push("/login"); // ✅ correct
+    }
+  }, [user]);
 
   const [posts, setPosts] = useState<Post[]>(SEED_POSTS);
   const [stories, setStories] = useState<Story[]>(SEED_STORIES);
@@ -669,7 +671,10 @@ export default function HomePage() {
 
       <div className="font-tech min-h-screen bg-[#010108] grid-bg">
 
-        <button onClick={() => signOut(auth)} className="bottom-nav-btn fixed bottom-4 right-4 z-50 bg-[#ff2d78] text-white px-5 py-3 rounded-full shadow-lg hover:bg-[#ff2d7811] transition-all">logout</button>
+        <button onClick={async () => {        // ✅ correct — this IS the async function
+            await fetch("/api/logout", { method: "POST" });
+            router.push("/login");
+        } }className="bottom-nav-btn fixed bottom-4 right-4 z-50 bg-[#ff2d78] text-white px-5 py-3 rounded-full shadow-lg hover:bg-[#ff2d7811] transition-all">logout</button>
 
         {/* ══ TICKER ══ */}
         <div className="overflow-hidden bg-[#ff2d78] relative" style={{ height: 28 }}>

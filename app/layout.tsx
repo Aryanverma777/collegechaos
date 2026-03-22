@@ -33,6 +33,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
+        suppressHydrationWarning
         className={`${syne.variable} ${dmSans.variable} ${jetbrainsMono.variable} antialiased bg-mesh-light dark:bg-mesh-dark text-text-primaryLight dark:text-text-primaryDark min-h-screen`}
       >
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
